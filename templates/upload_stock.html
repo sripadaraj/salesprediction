@@ -1,0 +1,160 @@
+{% extends 'admin.html' %}
+
+    {% block title %}
+        <title>Upload Stock</title>
+    {% endblock %}
+
+    {% block body %}
+            {% if msg == "uplaoded_successfully" %}
+                <div class="container">
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" aria-label="close" data-dismiss="alert">&times;</a>
+                    <strong>Stock Uploaded Successfully </strong>
+                </div>
+                </div>
+            {% endif %}
+            <div class="signup_formblg">
+            <h3 class="text_align1">Upload Stock</h3>
+            <div class="inner_signupformblg">
+            <form method="post" action="{{url_for('stock_submitted')}}" class="form-horizontal" onsubmit="return validateForm()" name="myForm" enctype = "multipart/form-data">
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Name of the Product:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" placeholder="Name of the Product" name="productname">
+                        <span id="productname" class="span_text"></span>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Product Type:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" placeholder="Enter Product Type(eg:like phones,shirts)" name="producttype">
+                        <span id="producttype" class="span_text"></span>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Quantity to be added:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" placeholder="Quantity to be added" name="quantityadd">
+                        <span id="quantity" class="span_text"></span>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Price:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" placeholder="Enter Price of the Product" name="price">
+                        <span id="price" class="span_text"></span>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Discount:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" placeholder="Discount of the Product(only numbers)" name="discount">
+                        <span id="discount" class="span_text"></span>
+                    </div>
+                  </div>
+
+                 <div class="form-group">
+                    <label class="control-label col-sm-5">Choose imagefile:</label>
+                    <div class="col-sm-7">
+                      <input type="file" name="imagefile" id="fileChooser">
+                        <span id="file1" class="span_text"></span>
+                    </div>
+                  </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-5">Select:</label>
+                    <div class="col-sm-7">
+                      <select name="selected" class="select_form1">
+                          <option value="">Select</option>
+                          <option value="mens_clothes">Mens clothing</option>
+                          <option value="mens_accessories">Men's Accessories</option>
+                          <option value="womens_clothes">Women's Clothing</option>
+                          <option value="womens_accessories">Women's Accessories</option>
+                          <option value="electronics_goods">Electronics Goods</option>
+                          <option value="books">Books</option>
+                      </select>
+                        <span id="selected1" class="span_text"></span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-7">
+                      <input type="submit" class="btn btn-info" value="Submit">
+                    </div>
+                  </div>
+            </form>
+            </div><!---inner_signupformblg----->
+        </div><!---signup_formblg----->
+<script>
+            function validateForm()
+            {
+                var productname = document.forms['myForm']['productname'].value;
+                var quantityadd = document.forms['myForm']['quantityadd'].value;
+                var price = document.forms['myForm']['price'].value;
+                var discount = document.forms['myForm']['discount'].value;
+                var producttype = document.forms['myForm']['producttype'].value;
+
+                var selected = document.forms['myForm']['selected'].value;
+                var fuData = document.getElementById('fileChooser');
+                var FileUploadPath = fuData.value;
+                var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+
+
+
+                        if(productname == "")
+                        {
+                            document.getElementById('productname').innerHTML = '*** Please Enter productname';
+                            return false;
+                        }
+                        if(producttype == "")
+                        {
+                            document.getElementById('producttype').innerHTML = "*** Please Enter producttype"
+                            return false;
+                        }
+                        if(quantityadd == "")
+                        {
+                            document.getElementById('quantity').innerHTML = '*** Please Enter quantityadd';
+                            return false;
+                        }
+                        if(isNaN(quantityadd))
+                        {
+                            document.getElementById('quantity').innerHTML = '*** Please Enter Only digits';
+                            return false;
+                        }
+                        if(price == "")
+                        {
+                            document.getElementById('price').innerHTML = "*** Please Enter price"
+                            return false;
+                        }
+                        if(isNaN(price))
+                        {
+                            document.getElementById('price').innerHTML = "*** Please Enter Digits only"
+                            return false;
+                        }
+                        if(discount == "")
+                        {
+                            document.getElementById('discount').innerHTML = "*** Please Enter discount"
+                            return false;
+                        }
+                        if(isNaN(discount))
+                        {
+                            document.getElementById('discount').innerHTML = "*** Please Enter Digits only"
+                            return false;
+                        }
+                        if(FileUploadPath == "")
+                        {
+                            document.getElementById('file1').innerHTML = "*** Please Upload an imagefile"
+                            return false;
+                        }
+                        if(Extension != "gif" && Extension != "png" && Extension != "bmp" && Extension != "jpeg" && Extension != "jpg")
+
+                        {
+                            document.getElementById('file1').innerHTML = "*** Please Upload .gif,.png,.bmp,.jpeg,.jpg,images only"
+                            return false;
+                        }
+                        if(selected == "")
+                        {
+                            document.getElementById('selected1').innerHTML = "***Select an option"
+                            return false;
+                        }
+            }
+        </script>
+    {% endblock %}

@@ -1,0 +1,154 @@
+{% extends 'admin.html' %}
+
+    {% block title %}
+        <title>View Stock</title>
+    {% endblock %}
+
+    {% block body %}
+        <div class="container">
+            {% if msg == "view_stock" %}
+            {% if msg1 == "updated_successfully" %}
+                    <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Successfully Updated</strong>
+                    </div>
+            {% endif %}
+            <div class="view_table">
+                <table class="stock_table">
+                    <tr class="stock_tr">
+                        <th class="stock_th">Product Image</th>
+                        <th class="stock_th">Product type</th>
+                        <th class="stock_th">Orginal Price</th>
+                        <th class="stock_th">Discount</th>
+                        <th class="stock_th">Quantity</th>
+                        <th class="stock_th">Update</th>
+                        <th class="stock_th">Delete</th>
+                    </tr>
+                    {% for i in results %}
+                    <tr class="stock_tr">
+                        <td class="stock_td"><img src="{{url_for('static',filename='images/'+i[0])}}"></td>
+                        <td class="stock_td">{{i[1]}}</td>
+                        <td class="stock_td">{{i[2]}}</td>
+                        <td class="stock_td">{{i[3]}}</td>
+                        <td class="stock_td">{{i[4]}}</td>
+                        <td class="stock_td">
+                            <form method="post" action="{{url_for('view_stock_upadted',id=i[0])}}">
+                                <input type="submit" value="Update" class="btn btn-info">
+                            </form>
+                        </td>
+                        <td class="stock_td">
+                            <form method="post" action="#">
+                                <input type="submit" value="Delete" class="btn btn-warning">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div><!---view_table---->
+            {% endif %}
+            {% if msg == "stock_update" %}
+                <div class="signup_formblg1">
+            <h3 class="text_align2">Update Stock</h3>
+            <div class="inner_signupformblg1">
+                {% for i in results %}
+                <form method="post" action="{{url_for('stock_upadted',id=i[0],quan=i[3])}}" class="form-horizontal" onsubmit="return validateForm()" name="myForm">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Name of the Product:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value="{{i[2]}}" name="productname" readonly>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Product Type:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value="{{i[1]}}" name="producttype" readonly>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Quantity to be added:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value="{{i[3]}}" name="quantityadd">
+                            <span id="quantity" class="span_text"></span>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Price:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value="{{i[4]}}" name="price">
+                            <span id="price" class="span_text"></span>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Discount:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control" value="{{i[5]}}" name="discount">
+                            <span id="discount" class="span_text"></span>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">Select:</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="selected" value="{{i[7]}}" class="form-control" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                          <input type="submit" class="btn btn-info" value="Update">
+                        </div>
+                      </div>
+                </form>
+                {% endfor %}
+            </div><!---inner_signupformblg----->
+                    {% for i in results %}
+                    <div class="view_stock_blg">
+                        <div class="form-group">
+                                <div class="col-sm-7">
+                                    <img src="{{url_for('static',filename='images/'+i[6])}}">
+                                </div>
+                        </div>
+                    </div><!---view_stock_blg---->
+                    {% endfor %}
+             </div><!---signup_formblg----->
+
+            {% endif %}
+        </div><!---containerdiv--->
+        <script>
+            function validateForm()
+            {
+                var quantityadd = document.forms['myForm']['quantityadd'].value;
+                var price = document.forms['myForm']['price'].value;
+                var discount = document.forms['myForm']['discount'].value;
+
+                        if(quantityadd == "")
+                        {
+                            document.getElementById('quantity').innerHTML = '*** Please Enter quantityadd';
+                            return false;
+                        }
+                        if(isNaN(quantityadd))
+                        {
+                            document.getElementById('quantity').innerHTML = '*** Please Enter Only digits';
+                            return false;
+                        }
+                        if(price == "")
+                        {
+                            document.getElementById('price').innerHTML = "*** Please Enter price"
+                            return false;
+                        }
+                        if(isNaN(price))
+                        {
+                            document.getElementById('price').innerHTML = "*** Please Enter Digits only"
+                            return false;
+                        }
+                        if(discount == "")
+                        {
+                            document.getElementById('discount').innerHTML = "*** Please Enter discount"
+                            return false;
+                        }
+                        if(isNaN(discount))
+                        {
+                            document.getElementById('discount').innerHTML = "*** Please Enter Digits only"
+                            return false;
+                        }
+            }
+        </script>
+    {% endblock %}

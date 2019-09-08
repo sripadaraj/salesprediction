@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>User Homepage</title>{% endblock %}
+        <script src="{{url_for('static',filename='JS/jquery-3.2.1.min.js')}}"></script>
+        <script src="{{url_for('static',filename='JS/owl.carousel.js')}}"></script>
+        <link href="{{url_for('static',filename='CSS/owl.carousel.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static',filename='CSS/owl.carousel.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static',filename='CSS/owl.theme.default.min.css')}}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="{{url_for('static',filename='CSS/style.css')}}" rel="stylesheet" type="text/css">
+    <style>
+    div#owl-demo1 .owl-next {
+    background: url(/images/right.png) no-repeat 0px 0px !important;
+    /*background: url(../images/testimonial/right.png) no-repeat 0px 0px !important;*/
+    position: absolute;
+    right: 0;
+    top: 34%;
+    width: 30px !important;
+    height: 30px !important;
+}
+div#owl-demo1 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    left: 0;
+    top: 34%;
+    width: 30px !important;
+    height: 30px !important;
+}
+div#owl-demo3 .owl-next {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat -52px 0px !important;
+    position: absolute;
+    right: 50px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+
+div#owl-demo3 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    right: 110px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+div#owl-demo4 .owl-next {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat -52px 0px !important;
+    position: absolute;
+    right: 50px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+
+div#owl-demo4 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    right: 110px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+div#owl-demo5 .owl-next {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat -52px 0px !important;
+    position: absolute;
+    right: 50px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+
+div#owl-demo5 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    right: 110px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+div#owl-demo6 .owl-next {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat -52px 0px !important;
+    position: absolute;
+    right: 50px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+
+div#owl-demo6 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    right: 110px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+div#owl-demo2 .owl-next {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat -52px 0px !important;
+    position: absolute;
+    right: 50px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+
+div#owl-demo2 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    right: 110px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+div#owl-demo7 .owl-next {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat -52px 0px !important;
+    position: absolute;
+    right: 50px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+
+div#owl-demo7 .owl-prev {
+    background: url('{{url_for('static',filename='images/arrows.png')}}') no-repeat 0px 0px !important;
+    position: absolute;
+    right: 110px;
+    top: 102%;
+    width: 55px !important;
+    height: 51px !important;
+}
+    </style>
+
+</head>
+<body>
+        <div class="container">
+            <h1 class="header_blg1">User Home Page</h1>
+        <nav class="navbar navbar-default">
+
+            <div class="navbar-header">
+              <a class="navbar-brand logo_img" href="/Admin-homepage"><img src="{{url_for('static',filename='images/logo_image1.jpg')}}" alt="logo"></a>
+            </div>
+            <ul class="nav navbar-nav nav_blg">
+              <li class="active"><a href="/User-homepage">Home</a></li>
+              <li><a href="/My ordered Products/">My Ordered Products</a></li>
+              <li><a href="/Logout">Logout</a></li>
+            </ul>
+        </nav>
+            {% block body %}
+            <div class="mens_cloth_blg">
+                        <h1> Men's Clothing</h1>
+                        <div class="courses-grid">
+                        <div id="owl-demo3" class="owl-carousel">
+                                {% for i in mc_results %}
+                                <div class="item-owl men_img_blg">
+                                    <img src="{{url_for('static',filename='images/'+i[3])}}" alt="images1" class="img-thumbnail sale_img">
+                                    <p class="sale_blg">Sale</p>
+                                    <p class="p_style">{{i[0]}}</p>
+                                    <div class="float_right">
+                                    <a href="{{url_for('like_products',id=i[3])}}"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                                    <a href="{{url_for('user_orderedproduct',id=i[3])}}"><i class='fa fa-shopping-cart'></i>Buy now</a>
+                                    </div>
+                                    <div class="float_left">
+                                        <p>&#8377;{{i[1]}}</p>
+                                        <p>{{i[2] | string + ('%')}}</p>
+                                        <p>&#8377;{{((i[1]|int)-((i[2]|int /100)*i[1]|int))}}</p>
+                                    </div>
+                                    <div class="clear_fix"></div>
+                                </div>
+                                {% endfor %}
+                        </div><!---owl-demo3-->
+                        </div><!---courses-grid-->
+                    </div><!--mens_cloth_blg1--->
+
+                    <div class="mens_cloth_blg">
+                        <h1> Men's Accessories </h1>
+                        <div class="courses-grid">
+                        <div id="owl-demo2" class="owl-carousel">
+                                {% for i in ma_results %}
+                                <div class="item-owl men_img_blg">
+                                    <img src="{{url_for('static',filename='images/'+i[3])}}" alt="images1" class="img-thumbnail sale_img">
+                                    <p class="sale_blg">Sale</p>
+                                    <p class="p_style">{{i[0]}}</p>
+                                    <div class="float_right">
+                                    <a href="{{url_for('like_products',id=i[3])}}"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                                    <a href="{{url_for('user_orderedproduct',id=i[3])}}"><i class='fa fa-shopping-cart'></i>Buy now</a>
+                                    </div>
+                                    <div class="float_left">
+                                        <p>&#8377;{{i[1]}}</p>
+                                        <p>{{i[2] | string + ('%')}}</p>
+                                        <p>&#8377;{{((i[1]|int)-((i[2]|int /100)*i[1]|int))}}</p>
+                                    </div>
+                                    <div class="clear_fix"></div>
+                                </div>
+                                {% endfor %}
+                        </div><!---owl-demo3-->
+                        </div><!---courses-grid-->
+                    </div><!--mens_cloth_blg2--->
+
+                    <div class="mens_cloth_blg">
+                        <h1> Women's Clothing </h1>
+                        <div class="courses-grid">
+                        <div id="owl-demo4" class="owl-carousel">
+                                {% for i in wc_results %}
+                                <div class="item-owl men_img_blg">
+                                    <img src="{{url_for('static',filename='images/'+i[3])}}" alt="images1" class="img-thumbnail sale_img">
+                                    <p class="sale_blg">Sale</p>
+                                    <p class="p_style">{{i[0]}}</p>
+                                    <div class="float_right">
+                                    <a href="{{url_for('like_products',id=i[3])}}"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                                    <a href="{{url_for('user_orderedproduct',id=i[3])}}"><i class='fa fa-shopping-cart'></i>Buy now</a>
+                                    </div>
+                                    <div class="float_left">
+                                        <p>&#8377;{{i[1]}}</p>
+                                        <p>{{i[2] | string + ('%')}}</p>
+                                        <p>&#8377;{{((i[1]|int)-((i[2]|int /100)*i[1]|int))}}</p>
+                                    </div>
+                                    <div class="clear_fix"></div>
+                                </div>
+                                {% endfor %}
+                        </div><!---owl-demo3-->
+                        </div><!---courses-grid-->
+                    </div><!--mens_cloth_blg3--->
+
+                    <div class="mens_cloth_blg">
+                        <h1> Women's Accessories </h1>
+                        <div class="courses-grid">
+                        <div id="owl-demo7" class="owl-carousel">
+                                {% for i in wa_results %}
+                                <div class="item-owl men_img_blg">
+                                    <img src="{{url_for('static',filename='images/'+i[3])}}" alt="images1" class="img-thumbnail sale_img">
+                                    <p class="sale_blg">Sale</p>
+                                    <p class="p_style">{{i[0]}}</p>
+                                    <div class="float_right">
+                                    <a href="{{url_for('like_products',id=i[3])}}"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                                    <a href="{{url_for('user_orderedproduct',id=i[3])}}"><i class='fa fa-shopping-cart'></i>Buy now</a>
+                                    </div>
+                                    <div class="float_left">
+                                        <p>&#8377;{{i[1]}}</p>
+                                        <p>{{i[2] | string + ('%')}}</p>
+                                        <p>&#8377;{{((i[1]|int)-((i[2]|int /100)*i[1]|int))}}</p>
+                                    </div>
+                                    <div class="clear_fix"></div>
+                                </div>
+                                {% endfor %}
+                        </div><!---owl-demo3-->
+                        </div><!---courses-grid-->
+                    </div><!--mens_cloth_blg4--->
+                    <div class="mens_cloth_blg">
+                        <h1> Electronics Goods </h1>
+                        <div class="courses-grid">
+                        <div id="owl-demo5" class="owl-carousel">
+                                {% for i in eg_results %}
+                                <div class="item-owl men_img_blg">
+                                    <img src="{{url_for('static',filename='images/'+i[3])}}" alt="images1" class="img-thumbnail sale_img">
+                                    <p class="sale_blg">Sale</p>
+                                    <p class="p_style">{{i[0]}}</p>
+                                    <div class="float_right">
+                                    <a href="{{url_for('like_products',id=i[3])}}"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                                    <a href="{{url_for('user_orderedproduct',id=i[3])}}"><i class='fa fa-shopping-cart'></i>Buy now</a>
+                                    </div>
+                                    <div class="float_left">
+                                        <p>&#8377;{{i[1]}}</p>
+                                        <p>{{i[2] | string + ('%')}}</p>
+                                        <p>&#8377;{{((i[1]|int)-((i[2]|int /100)*i[1]|int))}}</p>
+                                    </div>
+                                    <div class="clear_fix"></div>
+                                </div>
+                                {% endfor %}
+                        </div><!---owl-demo3-->
+                        </div><!---courses-grid-->
+                    </div><!--mens_cloth_blg4--->
+                    <div class="mens_cloth_blg">
+                        <h1> Books </h1>
+                        <div class="courses-grid">
+                        <div id="owl-demo6" class="owl-carousel">
+                                {% for i in b_results %}
+                                <div class="item-owl men_img_blg">
+                                    <img src="{{url_for('static',filename='images/'+i[3])}}" alt="images1" class="img-thumbnail sale_img">
+                                    <p class="sale_blg">Sale</p>
+                                    <p class="p_style">{{i[0]}}</p>
+                                    <div class="float_right">
+                                    <a href="{{url_for('like_products',id=i[3])}}"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                                    <a href="{{url_for('user_orderedproduct',id=i[3])}}"><i class='fa fa-shopping-cart'></i>Buy now</a>
+                                    </div>
+                                    <div class="float_left">
+                                        <p>&#8377;{{i[1]}}</p>
+                                        <p>{{i[2] | string + ('%')}}</p>
+                                        <p>&#8377;{{((i[1]|int)-((i[2]|int /100)*i[1]|int))}}</p>
+                                    </div>
+                                    <div class="clear_fix"></div>
+                                </div>
+                                {% endfor %}
+                        </div><!---owl-demo3-->
+                        </div><!---courses-grid-->
+                    </div><!--mens_cloth_blg4--->
+
+        </div><!---container---->
+        <script>
+                    $(document).ready(function() {
+                    $("#owl-demo3").owlCarousel({
+                        items : 2,
+                        lazyLoad : true,
+                        autoPlay : true,
+                        navigation : true,
+                        navigationText : false,
+                        pagination : false,
+                        });
+                    });
+		        </script>
+                <script>
+                    $(document).ready(function() {
+                    $("#owl-demo2").owlCarousel({
+                        items : 2,
+                        lazyLoad : true,
+                        autoPlay : true,
+                        navigation : true,
+                        navigationText : false,
+                        pagination : false,
+                        });
+                    });
+		        </script>
+                <script>
+                    $(document).ready(function() {
+                    $("#owl-demo4").owlCarousel({
+                        items : 2,
+                        lazyLoad : true,
+                        autoPlay : true,
+                        navigation : true,
+                        navigationText : false,
+                        pagination : false,
+                        });
+                    });
+		        </script>
+                <script>
+                    $(document).ready(function() {
+                    $("#owl-demo5").owlCarousel({
+                        items : 2,
+                        lazyLoad : true,
+                        autoPlay : true,
+                        navigation : true,
+                        navigationText : false,
+                        pagination : false,
+                        });
+                    });
+		        </script>
+                <script>
+                    $(document).ready(function() {
+                    $("#owl-demo6").owlCarousel({
+                        items : 2,
+                        lazyLoad : true,
+                        autoPlay : true,
+                        navigation : true,
+                        navigationText : false,
+                        pagination : false,
+                        });
+                    });
+		        </script>
+                <script>
+                    $(document).ready(function() {
+                    $("#owl-demo7").owlCarousel({
+                        items : 2,
+                        lazyLoad : true,
+                        autoPlay : true,
+                        navigation : true,
+                        navigationText : false,
+                        pagination : false,
+                        });
+                    });
+		        </script>
+            {% endblock %}
+            {% block content %}
+            {% endblock %}
+</body>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</html>

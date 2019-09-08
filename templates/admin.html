@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title%}<title>Admin Homepage</title>{% endblock %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="{{url_for('static',filename='CSS/style.css')}}" rel="stylesheet" type="text/css">
+        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+        <div class="container">
+            <h1 class="header_blg1">Admin Home Page</h1>
+            {% block nav %}
+        <nav class="navbar navbar-default">
+
+            <div class="navbar-header">
+              <a class="navbar-brand logo_img" href="/Admin-homepage"><img src="{{url_for('static',filename='images/logo_image1.jpg')}}" alt="logo"></a>
+            </div>
+            <ul class="nav navbar-nav nav_blg">
+                <li class="active"><a href="/Admin-homepage">Home</a></li>
+                <li><a href="/Upload_Stock">Upload Stock</a></li>
+                <li><a href="/Admin-homepage/View_stock">View Stock</a></li>
+                <li><a href="/Prediction">Prediction</a></li>
+                <li><a href="/Logout">Logout</a></li>
+            </ul>
+
+        </nav>
+            {% endblock %}
+            </div>
+        {% block body %}
+        {% endblock %}
+</body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>

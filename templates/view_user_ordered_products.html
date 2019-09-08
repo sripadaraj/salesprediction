@@ -1,0 +1,33 @@
+{% extends 'user.html' %}
+
+{% block body %}
+{% endblock %}
+
+            {% block content %}
+                <h1>Ordered Products </h1>
+                <table class="acct_table">
+                            <tr class="acct_tr">
+                                <th class="acct_th">Emailid</th>
+                                <th class="acct_th">Product Type</th>
+                                <th class="acct_th">Stock Id</th>
+                                <th class="acct_th">Price</th>
+                                <th class="acct_th">Discount</th>
+                                <th class="acct_th">Total Price</th>
+                                <th class="acct_th">Quantity</th>
+                                <th class="acct_th">Date and Time</th>
+                            </tr>
+                            {% for i in results%}
+                            <tr class="acct_tr">
+
+                                <td class="acct_td">{{i[1]}}</td>
+                                <td class="acct_td">{{i[3]}}</td>
+                                <td class="acct_td">{{i[2]}}</td>
+                                <td class="acct_td">{{i[4]}}</td>
+                                <td class="acct_td">{{i[5]}}</td>
+                                <td class="acct_td">{{i[6]}}</td>
+                                <td class="acct_td">{{i[7]}}</td>
+                                <td class="acct_td">{{i[8]}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+            {% endblock %}

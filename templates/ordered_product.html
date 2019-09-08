@@ -1,0 +1,114 @@
+{% extends 'user.html' %}
+
+{% block title %}
+    <title>Ordered Product </title>
+{% endblock %}
+            {% block body %}
+                {% if msg == "out_of_stock" %}
+                    <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" aria-label="close" data-dismiss="alert">&times;</a>
+                        <strong> The product is Out of Stock avilable only {{quantity}}</strong>
+                    </div>
+                {% endif %}
+                <div class="signup_formblg1">
+                    <h3 class="text_align2">Buy Product</h3>
+                    <div class="inner_signupformblg1">
+                        {% for i in results %}
+                        <form method="post" action="{{url_for('ordered_product',id=i[6])}}" class="form-horizontal" onsubmit="return validateForm()" name="myForm">
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Name of the Product:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" value="{{i[2]}}" name="productname" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Product Type:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" value="{{i[1]}}" name="producttype" readonly>
+                                </div>
+                              </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Quantity to be added:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" placeholder="Enter Quantity to be added" name="quantityadd" id="quantity1">
+                                    <span id="quantity" class="span_text"></span>
+                                </div>
+                              </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Price:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" value="{{i[4]}}" name="price" readonly id="oldprice">
+                                    <span id="price" class="span_text"></span>
+                                </div>
+                              </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Discount:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" value="{{i[5]}}" name="discount" readonly id="dicountprice">
+                                    <span id="discount" class="span_text"></span>
+                                </div>
+                              </div>
+                                <div class="total_blg"><a href="#" onclick="myfunction()">Calculate the total Price</a></div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Total Price:</label>
+                                <div class="col-sm-7">
+                                  <input type="text" class="form-control" id="answer" placeholder="Calculate the total price" name="totalprice" readonly>
+                                    <span id="totalprice" class="span_text"></span>
+                                </div>
+                              </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-5">Select:</label>
+                                <div class="col-sm-7">
+                                    <input type="text" name="selected" value="{{i[7]}}" class="form-control" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-sm-offset-5 col-sm-7">
+                                  <input type="submit" class="btn btn-danger" value="Buy Now">
+                                </div>
+                              </div>
+                        </form>
+                        {% endfor %}
+                            </div><!---inner_signupformblg----->
+                                {% for i in results %}
+                                <div class="view_stock_blg">
+                                    <div class="form-group">
+                                            <div class="col-sm-7">
+                                                <img src="{{url_for('static',filename='images/'+i[6])}}">
+                                            </div>
+                                    </div>
+                                </div><!---view_stock_blg---->
+                                {% endfor %}
+
+             </div><!---signup_formblg----->
+                    <script>
+                        function validateForm()
+                        {
+                            var quantityadd = document.forms['myForm']['quantityadd'].value;
+
+                            if(quantityadd == "")
+                            {
+                                document.getElementById('quantity').innerHTML = '** Please Enter No.of Quantity products';
+                                return false;
+                            }
+                            if(isNaN(quantityadd))
+                            {
+                                document.getElementById('quantity').innerHTML = '** Please Enter only digits';
+                                return false;
+                            }
+                        }
+                    </script>
+                    <script>
+                        function myfunction()
+                        {
+                            quantity =  document.getElementById('quantity1').value;
+                            oldprice =  document.getElementById('oldprice').value;
+                            dicountprice =  document.getElementById('dicountprice').value;
+                            totalprice = (oldprice - ((dicountprice/100)*oldprice))*quantity
+                            document.getElementById('answer').value = totalprice;
+                            console.log(totalprice);
+
+                        }
+                    </script>
+
+            {% endblock %}

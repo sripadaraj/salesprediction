@@ -1,0 +1,106 @@
+{% extends 'admin.html' %}
+
+{% block body %}
+    {% if msg == "prediction_form" %}
+        {% if msg2 == "predicted_bar" %}
+                    <section>
+                            <div id="chartContainer1" style="height: 300px; width: 100%; margin-bottom:25px;"></div>
+
+                        <script>
+                            window.onload = function () {
+                                    var chart = new CanvasJS.Chart("chartContainer1", {
+                                        animationEnabled: true,
+                                        theme: "light2", // "light1", "light2", "dark1", "dark2"
+                                        title:{
+                                            text: "{{product_type}} Stock Prediction"
+                                        },
+                                        axisY: {
+                                            title: "No of Products"
+                                        },
+                                        data: [{
+                                            type: "column",
+                                            dataPoints: [
+                                                {% for labels,values in set%}
+                                                { y: {{values|round}}, label: "{{labels}}" },
+                                                {% endfor %}
+                                            ]
+                                        }]
+                                    });
+                                    chart.render();
+
+                                    }
+                            </script>
+                    </section>
+        {% endif %}
+        <div class="prediction_form">
+            <h1>Prediction form </h1>
+        </div>
+        <div class="predict_form1">
+            <form action="{{url_for('prediction_submitted')}}" method="post">
+                <select name="selected_type" class="selected_predict">
+                    <option value="">Select product type</option>
+                    <option value="casual shirt">Casual shirt</option>
+                    <option value="party wear blazer">Party wear blazer</option>
+                    <option value="casual blazer">Casual blazer</option>
+                    <option value="casual suit">Casual suit</option>
+                    <option value="casual shirt">Party wear suit</option>
+                    <option value="casual shirt">Party wear jean</option>
+                    <option value="Raymond sun glassess">Raymond sun glassess</option>
+                    <option value="chudidar">chudidar</option>
+                    <option value="saree">saree</option>
+                    <option value="Golden Metal Bangles">Golden Metal Bangles</option>
+                    <option value="DSLR camera">DSLR camera</option>
+                    <option value="I Phone">I Phone</option>\
+                </select>
+                <select name="selected_month" class="selected_predict">
+                    <option value="">Select a month </option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">Novmember</option>
+                    <option value="12">December</option>
+                </select>
+                <div class="selected_predict">
+                <input type="submit" value="Submit" class="btn btn-info">
+                </div>
+            </form>
+            {% if msg1 == "submitted" %}
+            <div class="predicted_result">
+
+                    {% if month == 1%}
+                <h3>The Predicted Stock Product for {{product_type}} in January is {{result1}} Products </h3>
+                    {% elif month == 2 %}
+                <h3>The Predicted Stock Product for {{product_type}} in February is {{result1}} Products </h3>
+                {% elif month == 3 %}
+                <h3>The Predicted Stock Product for {{product_type}} in March is {{result1}} Products </h3>
+                {% elif month == 4 %}
+                <h3>The Predicted Stock Product for {{product_type}} in April is {{result1}} Products </h3>
+                {% elif month == 5 %}
+                <h3>The Predicted Stock Product for {{product_type}} in May is {{result1}} Products </h3>
+                {% elif month == 6 %}
+                <h3>The Predicted Stock Product for {{product_type}} in June is {{result1}} Products </h3>
+                {% elif month == 7 %}
+                <h3>The Predicted Stock Product for {{product_type}} in July is {{result1}} Products </h3>
+                {% elif month == 8 %}
+                <h3>The Predicted Stock Product for {{product_type}} in August is {{result1}} Products </h3>
+                {% elif month == 9 %}
+                <h3>The Predicted Stock Product for {{product_type}} in September is {{result1}} Products </h3>
+                {% elif month == 10 %}
+                <h3>The Predicted Stock Product for {{product_type}} in October is {{result1}} Products </h3>
+                {% elif month == 11 %}
+                <h3>The Predicted Stock Product for {{product_type}} in November is {{result1}} Products </h3>
+                {% else %}
+                <h3>The Predicted Stock Product for {{product_type}} in December is {{result1}} Products </h3>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
